@@ -10,11 +10,16 @@
 </head>
 
 <body>
-    <h1>Bienvenido a Checked</h1>
-    <textarea name="textarea" id="input-el" rows="2" cols="50" placeholder="Agregue el hecho que va a analizar acá"></textarea>
+    <div class="header">
+        <img class="logo" src="./images/Checked.png" alt="logo">
+        <h1>Bienvenido a Checked</h1>
+    </div>
+    <textarea name="textarea" id="input-el" rows="3" cols="50" placeholder="Agregue el hecho que va a analizar acá"></textarea>
     <!-- <input type="text" id="input-el" placeholder="Agregue el hecho que va a analizar acá"> -->
-    <button id="input-btn">Añadir al análisis</button>
-    <button id="delete-btn">Borrar</button>
+    <div class="btn-container">
+        <button id="input-btn">Añadir al análisis</button>
+        <button id="delete-btn">Borrar</button>
+    </div>
     <!-- <button id="py-btn">CorrerPython</button> -->
     <button id="send-btn">Enviar</button>
     <p id="h1">Estos han sido los parrafos que analizará con la extensión:</p>
