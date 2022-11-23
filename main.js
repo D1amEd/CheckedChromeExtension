@@ -1,26 +1,33 @@
+import { PythonShell } from 'python-shell';
 
+const pybtn = document.getElementById('py-btn')
 let myLeads = []
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
 const sendBtn = document.getElementById("send-btn")
-const prBtn = document.getElementById("pr-btn") //TODO: eliminar este botón de prueba
 const ulEl = document.getElementById("ul-el")
 const deleteBtn = document.getElementById("delete-btn")
 
+chrome.storage.sync.get("myLeads", function (result) {
+    myLeads = [].concat(result.myLeads)
+    console.log(myLeads)
+    render(myLeads)
+    chrome.storage.sync.set({ "myLeads": myLeads })
+})
 
 
-if (leadsFromLocalStorage) {
-    myLeads = chrome.storage.sync.get("myLeads", function(result){
-        render(myLeads)
-    })
-}
-
+pybtn.addEventListener("click", function () {
+    PythonShell.run('prueba.py', null, function (err) {
+        if (err) throw err;
+        console.log('finished');
+    });
+})
 function render(leads) {
     let listItems = ""
-    for (let i = 0; i < leads.length; i++) {
+    for (let i = 1; i < leads.length; i++) {
         listItems += `
             <li>
-                <a target='_blank' href='${leads[i]}'>
+                <a target='_blank'>
                     ${leads[i]}
                 </a>
             </li>
@@ -31,27 +38,28 @@ function render(leads) {
 
 
 inputBtn.addEventListener("click", function () {
+    myLeads[0] = "Prueba"
     myLeads.push(inputEl.value)
     inputEl.value = ""
-    localStorage.setItem("myLeads", JSON.stringify(myLeads))
+    chrome.storage.sync.set({ "myLeads": myLeads })
     render(myLeads)
+
 })
 
 deleteBtn.addEventListener("click", function () {
-    localStorage.clear()
+    chrome.storage.sync.clear()
     myLeads = []
     render(myLeads)
 })
 
 sendBtn.addEventListener("click", function () {
     enviarPython(myLeads)
-    localStorage.clear()
+    chrome.storage.sync.clear()
     myLeads = []
     render(myLeads)
 })
 
-prBtn.addEventListener("click", function () { alert("Hola") })
+function enviarPython(leads) {
+    for (let i = 1; i < leads.length; i++) { }
 
-function enviarPython(a) {
-    return;
 }
