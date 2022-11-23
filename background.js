@@ -1,14 +1,14 @@
 
 let myLeads = []
 
-
-
-let contextMenuItem = {
-    "id": "Analisis",
-    "title": "Parrafo a analizar",
-    "contexts": ["selection"]
-}
-chrome.contextMenus.create(contextMenuItem);
+chrome.contextMenus.removeAll(function () {
+    let contextMenuItem = {
+        "id": "Analisis",
+        "title": "Parrafo a analizar",
+        "contexts": ["selection"]
+    }
+    chrome.contextMenus.create(contextMenuItem);
+})
 
 
 

@@ -1,4 +1,3 @@
-import { PythonShell } from 'python-shell';
 
 const pybtn = document.getElementById('py-btn')
 let myLeads = []
@@ -10,18 +9,10 @@ const deleteBtn = document.getElementById("delete-btn")
 
 chrome.storage.sync.get("myLeads", function (result) {
     myLeads = [].concat(result.myLeads)
-    console.log(myLeads)
     render(myLeads)
     chrome.storage.sync.set({ "myLeads": myLeads })
 })
 
-
-pybtn.addEventListener("click", function () {
-    PythonShell.run('prueba.py', null, function (err) {
-        if (err) throw err;
-        console.log('finished');
-    });
-})
 function render(leads) {
     let listItems = ""
     for (let i = 1; i < leads.length; i++) {
@@ -52,14 +43,34 @@ deleteBtn.addEventListener("click", function () {
     render(myLeads)
 })
 
+
 sendBtn.addEventListener("click", function () {
-    enviarPython(myLeads)
+    alert("Se está realizando analisis de datos, recibirá un correo con los resultados en menos de 10 minutos")
+    // const abs = fetch('http://34.136.1.107:8080/reportes/', {
+    //     method: 'POST',
+    //     mode: 'no-cors',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({ "id": 2 })
+    // }).then((response) => response.json())
+    //     .then((data) => {
+    //         console.log('Success:', data);
+    //         console.log(response.json());
+    //     })
+    //     .catch((error) => {
+    //         console.error('Error:', error);
+    //     });
+
     chrome.storage.sync.clear()
     myLeads = []
     render(myLeads)
 })
 
-function enviarPython(leads) {
-    for (let i = 1; i < leads.length; i++) { }
+
+
+async function enviarPython(leads) {
+
+    // for (let i = 1; i < leads.length; i++) { }
 
 }

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Checked",
-  "description": "Extensión de chrome destinada a la detección de noticias falsas",
+  "description": "Extensión de chrome destinada a la detección de hechos falsos",
   "version": "1.0",
   "icons": {
     "128": "images/Checked.png"
@@ -13,6 +13,7 @@
   "background": {
     "service_worker": "background.js"
   },
+  
   "action": {
     "default_popup": "popup.html"
   }
